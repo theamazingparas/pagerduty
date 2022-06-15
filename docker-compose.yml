@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  mongodb:
+    image : mongo:4.2.8
+    container_name: mongodb
+    user: "mongodb"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - url_shortener_network
+    restart: always
+networks:
+  url_shortener_network:
+    driver: "bridge"
+volumes:
+  mongodata:
+    driver: local
